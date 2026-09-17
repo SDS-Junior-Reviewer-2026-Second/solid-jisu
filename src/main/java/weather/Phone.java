@@ -1,8 +1,9 @@
 package weather;
 
-public class Phone {
-    public String generateWeatherAlert(String weatherConditions) {
-        String alert = "It is " + weatherConditions;
-        return alert;
+public class Phone extends Notifier {
+
+    public Phone() {
+        super();
+        addWeatherToNotify("rainy");
     }
 }

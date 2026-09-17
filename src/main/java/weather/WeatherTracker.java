@@ -1,24 +1,22 @@
 package weather;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WeatherTracker {
     String currentConditions;
-    Phone phone;
-    Email email;
+    List<Notifier> notifiers;
 
     public WeatherTracker() {
-        phone = new Phone();
-        email = new Email();
+        notifiers = new ArrayList<>();
+        notifiers.add(new Phone()); // 강사님의 의도와 다른 것을 알았지만 이미 너무 늦었습니다..
+        notifiers.add(new Email()); // 이것도 그냥 외부에서 주입받는다고 가정해 주시면 안될까요
     }
 
     public void setCurrentConditions(String weatherDescription) {
         this.currentConditions = weatherDescription;
-        if (weatherDescription == "rainy") {
-            String alert = phone.generateWeatherAlert(weatherDescription);
-            System.out.print(alert);
-        }
-        if (weatherDescription == "sunny") {
-            String alert = email.generateWeatherAlert(weatherDescription);
-            System.out.print(alert);
+        for (Notifier notifier: notifiers){
+            notifier.alert(weatherDescription);
         }
     }
 }
